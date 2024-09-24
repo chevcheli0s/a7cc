@@ -57,10 +57,10 @@ $avb = curl https://android.googlesource.com/platform/external/avb/+/refs/heads/
 (curl https://raw.githubusercontent.com/unisoc-android/unisoc-android.github.io/refs/heads/master/subut/assets/rsa4096_vbmeta.pem).content | Out-File $rootDir\rsa4096_vbmeta.pem -Encoding ascii
 ``` 
 
-В папку **A7cc_root** на рабочем столе нужно положить свой boot.img и пропатченный Magisk'ом образ, затем выполнить в том же окне PowerShell 
+В папку **A7cc_root** на рабочем столе нужно положить пропатченный Magisk'ом образ, затем выполнить в том же окне PowerShell(имя файла ьерем свое) 
 ```PowerShell
 cd $rootDir
-python .\avbtool.py info_image --image .\boot.img
+python .\avbtool.py info_image --image .\ magisk_patched-27001_ez3YV.img
 ``` 
 
 На выходе получим что-то вроде
@@ -91,8 +91,8 @@ Descriptors:
       Flags:                 0
     Prop: com.android.build.boot.os_version -> '10'
 ```
-Для "красоты" можно скопировать свое значение поля Salt. У меня оно 44cde590d6afefb4e84281b8bdcaea9500ed30c17643a28174b5f29078907afa, у вас будет другое.\
-Затем подставляем его в команду ниже + меняем имя своего пропатченного Magisk'ом образа
+
+В команду ниже подставляем свои значения(Image size и Salt), полученные в предыдущем пункте + меняем имя пропатченного Magisk'ом образа на свое
 ```PowerShell
 cd $rootDir
 python .\avbtool.py add_hash_footer --image .\magisk_patched-27001_ez3YV.img --partition_name boot --partition_size 36700160 --key rsa4096_vbmeta.pem --algorithm SHA256_RSA4096 --salt 44cde590d6afefb4e84281b8bdcaea9500ed30c17643a28174b5f29078907afa
@@ -118,7 +118,7 @@ fasboot devices
 fastboot flash boot .\magisk_patched-27001_ez3YV.img
 ```
 
-Дожилаемся окончания процесса и перезагружаемся в систему командой
+Дожиlаемся окончания процесса и перезагружаемся в систему командой
 ```PowerShell
 fastboot reboot
 ```
