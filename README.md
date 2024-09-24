@@ -21,7 +21,7 @@
 - [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html)
 - [Python](https://www.python.org/downloads/)
 - [Драйвера для ADB(если, вдруг, телефон не виден)](https://developer.android.com/studio/run/win-usb)
-- Изменение настроек USB в рееестре, в случае использования USB 3.0 
+- Fix настроек USB в рееестре, в случае использования USB 3.0 
 
 Для облегчения задачи рекомендую установить пакетный менеджер [choco](https://chocolatey.org/install).\
 Вся установка **choco** сводится к запуску PowerShell от имени Администратора и выполнению в ней команды, с последующим нажатием клавиши enter
@@ -29,7 +29,7 @@
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 ``` 
-Затем, чтобы установить софт перечисленный выше, в том же окне вводим и жмем enter
+Затем, чтобы установить софт перечисленный выше, в том же окне вводим команду(copy-paste) и жмем enter
 ```PowerShell
 choco install adb openssl curl -y 
 choco install -y python312 --override --install-arguments '/quiet InstallAllUsers=1 PrependPath=1 TargetDir=""C:\Program Files\Python3""'
